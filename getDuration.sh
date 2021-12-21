@@ -8,7 +8,7 @@
 
 
 declare vb=1
-#	verbose default [1]
+#	verbose hightverbose [1]
 #	verbose only total in seconds [0]
 #	verbose only total days:hours:minutes:seconds [2]
 #	verbose simply [3]
@@ -31,7 +31,7 @@ function updateTotal
 function printSpecial
 {
 	[[ $y -eq 0 ]] && echo -e "geting time of all songs"
-	if [ $vb -eq 1 ] ; then 
+	if [ $vb -eq 3 ] ; then 
 		m=`mp3info -p %m $1`
 		s=`mp3info -p %s $1`
 
@@ -50,7 +50,7 @@ function printSpecial
 
 function printEnd
 {
-	[[ $vb -eq 3 ]] && printf "\b[done]\n"
+	[[ $vb -eq 1 ]] && printf "\b[done]\n"
 	updateTotal
 	printf -- '=%.0s' {1..57}
 	printf '\n=%15s music you have a total time:%12s' "for: $y" "="
@@ -76,12 +76,12 @@ for i in "$@"; do
 	t=`mp3info -p %S $i`
 	ts=`echo $ts + $t | bc`
 	[[ $vb -eq 1 ]] || [[ $vb -eq 3 ]] && printSpecial $i ; y=`echo $y+1|bc`
-	[[ $vb -eq 2 ]] && y=`echo $y+1|bc`
 done
 
 # for end of scripti
 case $vb in 
 	0) echo "$ts";;
+	2) updateTotal ; printf '%s:%.2d:%.2d:%.2d\n' $td $th $tm $ts;;
 	*) printEnd ;;
 esac
 
