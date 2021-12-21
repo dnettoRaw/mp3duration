@@ -1,9 +1,19 @@
 # mp3duration
 get mp3 durattion files
-
+<br/>
+### dependence 
+mp3info <br/>
+| os       | command                        |
+| -------- | ------------------------------ |
+| linux    | ```apt-get install mp3info```  |
+| mac      | ```brew install mp3info```     |
+| windows  | ```...```                      |
 ### example:
-
-for single file
+run without clone
+```bash
+bash <(curl -s https://raw.githubusercontent.com/dnettoRaw/mp3duration/main/getDuration.sh) myFavoriteMusic.mp3
+```
+<br/>for single file
 ```bash
 bash getDuration.sh myFavoriteMusic.mp3
 ```
@@ -11,7 +21,7 @@ for folder
 ```bash
 bash getDuration.sh myFolder/*.mp3
 ```
-
+<br><br/> 
 ### options:
 verbose off
 ```bash
